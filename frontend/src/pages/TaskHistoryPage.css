@@ -1,0 +1,58 @@
+/* ── Task History Page ─────────────────────────────────── */
+.history-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── History Sections ──────────────────────────────────── */
+.history-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.history-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.history-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.history-section-header h2 {
+  font-size: 1.05rem;
+  flex: 1;
+}
+
+.history-section-header svg {
+  font-size: 1.1rem;
+}
+
+.completed-header {
+  color: var(--status-completed);
+}
+
+.missing-header {
+  color: var(--status-missing);
+}
+
+.pending-header {
+  color: var(--status-pending);
+}
+
+.history-section-header .section-count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: 2px 10px;
+  background: var(--bg-card);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+}

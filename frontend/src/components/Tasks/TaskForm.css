@@ -1,0 +1,181 @@
+/* ── Task Form ─────────────────────────────────────────── */
+.task-form {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 600px;
+}
+
+/* ── Form Group ────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.label-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.input-readonly {
+  opacity: 0.5;
+  cursor: not-allowed;
+  user-select: text;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Date input styling */
+.form-group input[type="date"] {
+  color-scheme: dark;
+}
+
+/* ── Error State ───────────────────────────────────────── */
+.form-group.has-error input,
+.form-group.has-error textarea {
+  border-color: var(--status-missing);
+}
+
+.form-error {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: var(--status-missing);
+  animation: fadeIn 0.3s ease;
+}
+
+/* ── Priority Selector ─────────────────────────────────── */
+.priority-selector {
+  display: flex;
+  gap: 8px;
+}
+
+.priority-option {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.priority-option:hover {
+  border-color: var(--text-muted);
+  color: var(--text-secondary);
+}
+
+.priority-option.selected.priority-low {
+  border-color: var(--priority-low);
+  color: var(--priority-low);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.priority-option.selected.priority-medium {
+  border-color: var(--priority-medium);
+  color: var(--priority-medium);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.priority-option.selected.priority-high {
+  border-color: var(--priority-high);
+  color: var(--priority-high);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* ── Submit Button ─────────────────────────────────────── */
+.form-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--accent-gradient);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: white;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-glow);
+  margin-top: 8px;
+}
+
+.form-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.form-submit:active {
+  transform: translateY(0);
+}
+
+/* ── Success Message ───────────────────────────────────── */
+.form-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--status-completed-bg);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-sm);
+  color: var(--status-completed);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .task-form {
+    padding: 20px;
+  }
+
+  .priority-selector {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,171 @@
+/* ── Task Card ─────────────────────────────────────────── */
+.task-card {
+  position: relative;
+  padding: 20px;
+  overflow: hidden;
+  transition: all var(--transition-base);
+  cursor: default;
+}
+
+.task-card:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.task-card.completed {
+  opacity: 0.7;
+}
+
+.task-card.completed:hover {
+  opacity: 1;
+}
+
+.task-card.completed .task-card-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* ── Priority Accent ──────────────────────────────────── */
+.task-card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+  transition: width var(--transition-fast);
+}
+
+.task-card:hover .task-card-accent {
+  width: 4px;
+}
+
+.priority-low .task-card-accent {
+  background: var(--priority-low);
+}
+
+.priority-medium .task-card-accent {
+  background: var(--priority-medium);
+}
+
+.priority-high .task-card-accent {
+  background: var(--priority-high);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
+}
+
+/* ── Header ────────────────────────────────────────────── */
+.task-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+/* ── Content ───────────────────────────────────────────── */
+.task-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  line-height: 1.4;
+  transition: color var(--transition-fast);
+}
+
+.task-card-desc {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 6px;
+  font-style: italic;
+}
+
+.task-card-content {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 2px solid var(--border-default);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* ── Meta ──────────────────────────────────────────────── */
+.task-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.task-card-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.task-card-assigned {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.task-card-date.overdue {
+  color: var(--status-missing);
+}
+
+/* ── Actions ───────────────────────────────────────────── */
+.task-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.task-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.task-action-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+}
+
+.toggle-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.delete-btn {
+  margin-left: auto;
+  padding: 6px 8px;
+}
+
+.delete-btn:hover {
+  border-color: var(--status-missing);
+  color: var(--status-missing);
+  background: var(--status-missing-bg);
+}

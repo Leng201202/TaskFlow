@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: 
+      context: ./frontend
+    container_name: react-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+  backend:
+    build:
+      context: ./backend
+    container_name: node-backend
+    environment:
+      - DATABASE_URL=mysql://leng:20122002@db:3306/task
+      - REDIS_URL=redis://redis:6379
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - redis
+  db:
+    image: mysql:8.0
+    container_name: task-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=20122002
+      - MYSQL_DATABASE=task
+      - MYSQL_USER=leng
+      - MYSQL_PASSWORD=20122002
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+  redis:
+    image: redis:7.2-alpine
+    container_name: task-redis
+    volumes:
+      - redis-data:/data
+volumes:
+  mysql-data:
+    driver: local
+  redis-data:
+    driver: local
