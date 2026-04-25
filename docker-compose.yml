@@ -29,8 +29,6 @@ services:
       - MYSQL_DATABASE=task
       - MYSQL_USER=leng
       - MYSQL_PASSWORD=20122002
-    ports:
-      - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
   redis:
