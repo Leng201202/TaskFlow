@@ -112,3 +112,41 @@ sudo reboot
 ### 6. Prisma "Can't reach database server at db:3306"
 **The Problem:** Even though all containers were successfully running, Prisma failed to connect to the database. This was caused by Ubuntu's Uncomplicated Firewall (UFW) accidentally dropping inter-container forwarded packets on the Docker bridge network.
 **The Fix:** We temporarily disabled UFW on the server (`sudo ufw disable`). For cloud-hosted VMs (AWS, DigitalOcean), it is highly recommended to leave UFW disabled and rely entirely on the Cloud Provider's Web Firewall (Security Groups) to manage port access.
+
+---
+
+## Part 3: Production Hardening (Nginx & SSL)
+
+For a "Real-World" deployment, you should never expose your application ports (3000, 8080) directly to the internet. Instead, we use an **Nginx Gateway**.
+
+### Step 1: The Gateway Architecture
+Our new `docker-compose.yml` includes a `gateway` service. 
+- It listens on **Port 80** (standard HTTP).
+- It proxies `/api` requests to the backend.
+- It serves the frontend for all other requests.
+
+### Step 2: Update your Security Group
+In your Cloud Provider (AWS, DigitalOcean, etc.):
+1. **ALLOW** Port 80 (HTTP) and Port 443 (HTTPS).
+2. **REMOVE/BLOCK** Port 3000 and 8080. They are now private and secure.
+
+### Step 3: Setting up a Domain & HTTPS (SSL)
+To get the "Green Lock" in the browser, you need a domain name and an SSL certificate.
+
+1. **Point your Domain**: Update your domain's A-Record to point to your Ubuntu VM's Public IP.
+2. **Install Certbot**:
+   ```bash
+   sudo apt install certbot
+   ```
+3. **Get a Certificate**:
+   Stop your docker containers briefly and run:
+   ```bash
+   sudo certbot certonly --standalone -d yourdomain.com
+   ```
+4. **Update Nginx for SSL**:
+   Modify `nginx/nginx.conf` to listen on port 443 and point to your new certificates in `/etc/letsencrypt/live/yourdomain.com/`. (Ask me for the exact config when you are ready to do this!)
+
+### Step 4: Access your App
+You no longer need to type a port number in your browser! Just go to:
+`http://<YOUR_IP_OR_DOMAIN>`
+
