@@ -113,6 +113,15 @@ sudo reboot
 **The Problem:** Even though all containers were successfully running, Prisma failed to connect to the database. This was caused by Ubuntu's Uncomplicated Firewall (UFW) accidentally dropping inter-container forwarded packets on the Docker bridge network.
 **The Fix:** We temporarily disabled UFW on the server (`sudo ufw disable`). For cloud-hosted VMs (AWS, DigitalOcean), it is highly recommended to leave UFW disabled and rely entirely on the Cloud Provider's Web Firewall (Security Groups) to manage port access.
 
+### 7. Gateway "Address already in use" (Port 80)
+**The Problem:** When starting the Nginx Gateway, Docker throws an error: `failed to bind host port 0.0.0.0:80/tcp: address already in use`. This happens because Ubuntu often comes with a standalone Nginx service pre-installed and running, which blocks Docker from using port 80.
+**The Fix:** Stop and disable the local Nginx service to let Docker take over the port:
+```bash
+sudo systemctl stop nginx
+sudo systemctl disable nginx
+sudo docker compose up -d
+```
+
 ---
 
 ## Part 3: Production Hardening (Nginx & SSL)
