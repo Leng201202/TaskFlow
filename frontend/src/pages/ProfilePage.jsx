@@ -13,8 +13,26 @@ import './ProfilePage.css';
 export default function ProfilePage() {
   const { user, updateUser } = useUserStore();
   const [editing, setEditing] = useState(false);
-  const [form, setForm] = useState({ name: user.name, email: user.email, bio: user.bio });
+  const [form, setForm] = useState({ 
+    name: user?.name || '', 
+    email: user?.email || '', 
+    bio: user?.bio || '' 
+  });
   const [saved, setSaved] = useState(false);
+
+  if (!user) {
+    return (
+      <div className="profile-page">
+        <section className="page-header animate-fade-in">
+          <div className="page-header-icon"><FiUser /></div>
+          <div>
+            <h1>Profile</h1>
+            <p>Please log in to view your profile.</p>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +52,7 @@ export default function ProfilePage() {
   };
 
   // Initials from Prisma `name` field (single name field)
-  const initials = user.name
+  const initials = (user.name || 'U')
     .split(' ')
     .map((n) => n[0])
     .join('')

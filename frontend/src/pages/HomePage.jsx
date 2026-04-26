@@ -75,7 +75,7 @@ export default function HomePage() {
       <section className="greeting-banner animate-fade-in">
         <div>
           <h1>
-            {getGreeting()}, <span className="gradient-text">{user.name.split(' ')[0]}</span> 👋
+            {getGreeting()}, <span className="gradient-text">{user?.name?.split(' ')[0] || 'User'}</span> 👋
           </h1>
           <p className="greeting-date">{today}</p>
         </div>
